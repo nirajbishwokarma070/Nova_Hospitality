@@ -30,6 +30,19 @@
         </div>
     </section>
 
+    <section class="rooms section-pad" id="rooms" aria-labelledby="rooms-title">
+        <div class="rooms__copy reveal">
+            <p class="eyebrow"><span></span> Rooms</p>
+            <h2 id="rooms-title">{{ $content['rooms']['title_first'] }}<br><em>{{ $content['rooms']['title_second'] }}</em></h2>
+            <p>{{ $content['rooms']['intro'] }}</p>
+            <x-button href="#contact" variant="text">Ask us about rooms <span aria-hidden="true">↗</span></x-button>
+        </div>
+        <div class="rooms__image reveal">
+            <img src="{{ asset($content['rooms']['image']) }}" alt="{{ $content['rooms']['image_alt'] }}" width="1200" height="800" loading="lazy">
+            <span class="image-note">Illustrative photo · not a Nova room</span>
+        </div>
+    </section>
+
     <section class="experience section-pad" id="experience" aria-labelledby="experience-title">
         <div class="section-heading reveal">
             <div>

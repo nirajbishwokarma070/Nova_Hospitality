@@ -19,6 +19,15 @@ return [
         'credit' => 'Kaski home — Sudip Shrestha, Unsplash',
         'credit_url' => 'https://unsplash.com/photos/a-building-with-a-mountain-in-the-background-B6HS8aEEEYM',
     ],
+    'rooms' => [
+        'title_first' => 'Our',
+        'title_second' => 'Rooms',
+        'intro' => 'Room details are coming soon. Please contact Nova Hospitality for current information.',
+        'image' => 'images/pokhara-room.webp',
+        'image_alt' => 'Illustrative guest room in Pokhara, Nepal; not a Nova Hospitality room',
+        'credit' => 'Pokhara room — Ashok Acharya, Unsplash',
+        'credit_url' => 'https://unsplash.com/photos/a-couple-of-people-sitting-on-a-bed-looking-out-a-window-dNbP-9Zaz-8',
+    ],
     'experience' => [
         'title_first' => 'Experience the',
         'title_second' => 'Difference',

@@ -11,7 +11,7 @@ class HomeController extends Controller
     {
         $content = HomepageContent::query()->find(1)?->content ?? config('homepage');
         $media = array_merge(
-            [$content['hero'], $content['about']],
+            [$content['hero'], $content['about'], $content['rooms']],
             $content['experience']['services'],
             $content['gallery']['images'],
         );

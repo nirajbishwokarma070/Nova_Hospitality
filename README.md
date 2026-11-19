@@ -1,6 +1,6 @@
 # Nova Hospitality
 
-A five-section, responsive Laravel and Blade website for Nova Hospitality. Illustrative photographs are not Nova Hospitality properties. Homepage copy and images can be updated through the protected admin panel; image credits are listed below the gallery.
+A six-section, responsive Laravel and Blade website for Nova Hospitality. Illustrative photographs are not Nova Hospitality properties. Homepage copy and images can be updated through the protected admin panel; image credits are listed below the gallery.
 
 ## Local development
 

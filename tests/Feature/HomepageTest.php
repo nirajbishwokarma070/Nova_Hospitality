@@ -11,16 +11,18 @@ class HomepageTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_homepage_has_five_main_sections_and_the_company_contact_details(): void
+    public function test_homepage_has_six_main_sections_and_the_company_contact_details(): void
     {
         $response = $this->get(route('home'));
 
         $response->assertOk()
             ->assertSee('A New Chapter')
             ->assertSee('Hospitality That')
+            ->assertSee('Room details are coming soon.')
             ->assertSee('Experience the')
             ->assertSee('Explore Our')
             ->assertSee('Get in')
+            ->assertSee('href="'.route('home').'#rooms"', false)
             ->assertSee('9855016037')
             ->assertSee('sagarshrestha813@gmail.com')
             ->assertSee('href="mailto:sagarshrestha813@gmail.com"', false)
@@ -30,7 +32,7 @@ class HomepageTest extends TestCase
             ->assertSee('href="https://www.instagram.com/"', false)
             ->assertSee('href="https://www.youtube.com/"', false);
 
-        self::assertSame(5, preg_match_all('/<section\b/', (string) $response->getContent()));
+        self::assertSame(6, preg_match_all('/<section\b/', (string) $response->getContent()));
     }
 
     public function test_contact_form_reports_validation_errors_without_sending_email(): void

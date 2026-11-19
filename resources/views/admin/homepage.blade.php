@@ -108,9 +108,51 @@
             </div>
         </section>
 
-        <section class="admin-card admin-section" aria-labelledby="experience-fields">
+        <section class="admin-card admin-section" aria-labelledby="rooms-fields">
             <div class="admin-section__heading">
                 <p class="admin-eyebrow">Section 03</p>
+                <h2 id="rooms-fields">Rooms</h2>
+            </div>
+            <div class="admin-fields">
+                <div class="admin-field">
+                    <label for="rooms-title-first">Heading, first line</label>
+                    <input id="rooms-title-first" name="rooms[title_first]" value="{{ old('rooms.title_first', $content['rooms']['title_first']) }}" maxlength="80" required>
+                    @error('rooms.title_first')<span class="admin-error">{{ $message }}</span>@enderror
+                </div>
+                <div class="admin-field">
+                    <label for="rooms-title-second">Heading, second line</label>
+                    <input id="rooms-title-second" name="rooms[title_second]" value="{{ old('rooms.title_second', $content['rooms']['title_second']) }}" maxlength="80" required>
+                    @error('rooms.title_second')<span class="admin-error">{{ $message }}</span>@enderror
+                </div>
+                <div class="admin-field admin-field--wide">
+                    <label for="rooms-intro">Room information</label>
+                    <textarea id="rooms-intro" name="rooms[intro]" rows="2" maxlength="300" required>{{ old('rooms.intro', $content['rooms']['intro']) }}</textarea>
+                    @error('rooms.intro')<span class="admin-error">{{ $message }}</span>@enderror
+                </div>
+                <div class="admin-image-field">
+                    <img src="{{ asset($content['rooms']['image']) }}" alt="" loading="lazy">
+                    <div class="admin-field">
+                        <label for="rooms-image">Replace rooms image</label>
+                        <input id="rooms-image" name="rooms[image_upload]" type="file" accept="image/jpeg,image/png,image/webp">
+                        <small>JPG, PNG, or WebP; maximum 5 MB.</small>
+                        @error('rooms.image_upload')<span class="admin-error">{{ $message }}</span>@enderror
+                        <label for="rooms-image-alt">Image description</label>
+                        <input id="rooms-image-alt" name="rooms[image_alt]" value="{{ old('rooms.image_alt', $content['rooms']['image_alt']) }}" maxlength="180" required>
+                        @error('rooms.image_alt')<span class="admin-error">{{ $message }}</span>@enderror
+                        <label for="rooms-credit">Photo credit (optional)</label>
+                        <input id="rooms-credit" name="rooms[credit]" value="{{ old('rooms.credit', $content['rooms']['credit'] ?? '') }}" maxlength="120">
+                        @error('rooms.credit')<span class="admin-error">{{ $message }}</span>@enderror
+                        <label for="rooms-credit-url">Credit link (optional)</label>
+                        <input id="rooms-credit-url" name="rooms[credit_url]" type="url" value="{{ old('rooms.credit_url', $content['rooms']['credit_url'] ?? '') }}" maxlength="2048">
+                        @error('rooms.credit_url')<span class="admin-error">{{ $message }}</span>@enderror
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-card admin-section" aria-labelledby="experience-fields">
+            <div class="admin-section__heading">
+                <p class="admin-eyebrow">Section 04</p>
                 <h2 id="experience-fields">Experience</h2>
             </div>
             <div class="admin-fields">
@@ -169,7 +211,7 @@
 
         <section class="admin-card admin-section" aria-labelledby="gallery-fields">
             <div class="admin-section__heading">
-                <p class="admin-eyebrow">Section 04</p>
+                <p class="admin-eyebrow">Section 05</p>
                 <h2 id="gallery-fields">Gallery</h2>
             </div>
             <div class="admin-fields">
@@ -225,7 +267,7 @@
 
         <section class="admin-card admin-section" aria-labelledby="contact-fields">
             <div class="admin-section__heading">
-                <p class="admin-eyebrow">Section 05</p>
+                <p class="admin-eyebrow">Section 06</p>
                 <h2 id="contact-fields">Contact introduction</h2>
             </div>
             <div class="admin-fields">

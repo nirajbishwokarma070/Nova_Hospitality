@@ -219,6 +219,10 @@ button { color: inherit; }
 .about__image img { position: relative; width: 100%; height: 485px; object-fit: cover; }
 .image-note { position: absolute; right: 0; bottom: 0; padding: 13px 18px; background: var(--paper); color: var(--muted); font-family: var(--serif); font-size: 17px; font-style: italic; }
 .about__copy { max-width: 465px; padding: 18px 0; }
+.rooms { display: grid; grid-template-columns: .85fr 1.05fr; align-items: center; gap: clamp(56px, 9vw, 130px); background: #fff; }
+.rooms__copy { max-width: 465px; }
+.rooms__image { position: relative; }
+.rooms__image img { width: 100%; height: 430px; object-fit: cover; }
 .about h2, .section-heading h2, .contact h2 {
     margin: 0;
     font-size: clamp(38px, 4.1vw, 57px);
@@ -226,9 +230,12 @@ button { color: inherit; }
     letter-spacing: -.045em;
     line-height: 1.12;
 }
-.about h2 em, .section-heading h2 em, .contact h2 em { color: var(--green-deep); font-family: var(--serif); font-weight: 400; }
+.rooms h2 { margin: 0; font-size: clamp(38px, 4.1vw, 57px); font-weight: 500; letter-spacing: -.045em; line-height: 1.12; }
+.about h2 em, .rooms h2 em, .section-heading h2 em, .contact h2 em { color: var(--green-deep); font-family: var(--serif); font-weight: 400; }
 .about__copy > p:not(.eyebrow) { margin: 22px 0 0; color: var(--muted); font-size: 14px; }
 .about__copy .button { margin-top: 22px; }
+.rooms__copy > p:not(.eyebrow) { margin: 22px 0 0; color: var(--muted); font-size: 14px; }
+.rooms__copy .button { margin-top: 22px; }
 
 .experience { padding-top: 50px; background: #eeede7; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 42px; margin-bottom: 48px; }
@@ -333,8 +340,10 @@ button { color: inherit; }
     .header-contact { padding: 9px 11px; }
     .section-pad { padding: 70px max(30px, calc((100% - 1240px) / 2)); }
     .about { gap: 48px; padding-bottom: 48px; }
+    .rooms { gap: 48px; }
     .experience { padding-top: 46px; }
     .about__image img { height: 420px; }
+    .rooms__image img { height: 390px; }
     .experience-grid { gap: 15px; }
     .experience-card__image img { height: 225px; }
     .experience-card__copy { padding: 20px 16px 22px; }
@@ -405,10 +414,12 @@ button { color: inherit; }
     .hero__photo-note { right: 26px; bottom: 52px; max-width: 170px; font-size: 8px; text-align: right; }
     .section-pad { padding: 56px 24px; }
     .about { grid-template-columns: 1fr; gap: 36px; padding-bottom: 38px; }
+    .rooms { grid-template-columns: 1fr; gap: 30px; }
     .experience { padding-top: 38px; }
     .about__image img { height: min(390px, 85vw); }
+    .rooms__image img { height: min(390px, 85vw); }
     .about__copy { padding: 0; }
-    .about h2, .section-heading h2 { font-size: clamp(39px, 10vw, 53px); }
+    .about h2, .rooms h2, .section-heading h2 { font-size: clamp(39px, 10vw, 53px); }
     .section-heading { align-items: start; flex-direction: column; gap: 18px; margin-bottom: 32px; }
     .section-heading > p { max-width: 440px; }
     .experience-grid { grid-template-columns: 1fr; gap: 18px; }

@@ -57,6 +57,7 @@
         <nav class="site-nav" id="primary-navigation" aria-label="Main navigation" data-site-nav>
             <a href="{{ route('home') }}#home">Home</a>
             <a href="{{ route('home') }}#about">About</a>
+            <a href="{{ route('home') }}#rooms">Rooms</a>
             <a href="{{ route('home') }}#experience">Experience</a>
             <a href="{{ route('home') }}#gallery">Gallery</a>
             <a href="{{ route('home') }}#contact">Contact</a>
