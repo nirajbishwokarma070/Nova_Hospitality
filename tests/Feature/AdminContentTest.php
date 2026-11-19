@@ -29,10 +29,16 @@ class AdminContentTest extends TestCase
         $this->actingAs($admin)
             ->get(route('admin.content.edit'))
             ->assertOk()
+            ->assertSee('Section 03')
+            ->assertSee('Section 05')
             ->assertSee('Page heading, notice and feature photo')
             ->assertSee('Room 1 · Standard Room')
             ->assertSee('Gallery heading and supporting text')
-            ->assertSee('Image 1');
+            ->assertSee('Image 1')
+            ->assertDontSee('Section 01')
+            ->assertDontSee('Section 02')
+            ->assertDontSee('Section 04')
+            ->assertDontSee('Section 06');
     }
 
     public function test_regular_users_cannot_sign_in_to_the_admin_panel(): void
@@ -51,15 +57,27 @@ class AdminContentTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_admin_can_update_homepage_copy_and_upload_a_hero_image(): void
+    public function test_admin_can_update_rooms_and_gallery_without_changing_other_sections(): void
     {
         Storage::fake('public');
         $admin = User::factory()->create(['is_admin' => true]);
+        $existingContent = config('homepage');
+        $existingContent['hero']['title_first'] = 'Previously saved hero copy';
+        $existingContent['about']['intro'] = 'Previously saved about copy';
+        $existingContent['experience']['intro'] = 'Previously saved experience copy';
+        $existingContent['contact']['intro'] = 'Previously saved contact copy';
+        $existingRecord = new HomepageContent;
+        $existingRecord->id = 1;
+        $existingRecord->content = $existingContent;
+        $existingRecord->save();
+
         $payload = $this->editorPayload();
-        $payload['hero']['title_first'] = 'A Thoughtful Stay';
-        $payload['hero']['image_upload'] = $this->fakePng();
+        $payload['section'] = 'rooms';
+        $payload['rooms']['image_upload'] = $this->fakePng();
         $payload['rooms']['types'][0]['price'] = 'NPR 2,500 (test)';
         $payload['rooms']['types'][0]['availability'] = 'Available (test)';
+        $payload['gallery']['images'][0]['caption'] = 'Gallery caption (test)';
+        $payload['gallery']['images'][0]['image_upload'] = $this->fakePng();
 
         $this->post(route('admin.login.store'), [
             'email' => $admin->email,
@@ -67,18 +85,25 @@ class AdminContentTest extends TestCase
         ])->assertRedirect(route('admin.dashboard'));
 
         $this->put(route('admin.content.update'), $payload)
-            ->assertRedirect(route('admin.content.edit'))
+            ->assertRedirect(route('admin.content.edit', ['section' => 'rooms']))
             ->assertSessionHas('success');
 
         $savedContent = HomepageContent::query()->firstOrFail()->content;
 
-        self::assertSame('A Thoughtful Stay', $savedContent['hero']['title_first']);
+        self::assertSame('Previously saved hero copy', $savedContent['hero']['title_first']);
+        self::assertSame('Previously saved about copy', $savedContent['about']['intro']);
+        self::assertSame('Previously saved experience copy', $savedContent['experience']['intro']);
+        self::assertSame('Previously saved contact copy', $savedContent['contact']['intro']);
         self::assertSame('NPR 2,500 (test)', $savedContent['rooms']['types'][0]['price']);
         self::assertSame('Available (test)', $savedContent['rooms']['types'][0]['availability']);
-        self::assertStringStartsWith('storage/homepage/', $savedContent['hero']['image']);
-        Storage::disk('public')->assertExists(substr($savedContent['hero']['image'], strlen('storage/')));
+        self::assertSame('Gallery caption (test)', $savedContent['gallery']['images'][0]['caption']);
+        self::assertStringStartsWith('storage/homepage/', $savedContent['rooms']['image']);
+        self::assertStringStartsWith('storage/homepage/', $savedContent['gallery']['images'][0]['image']);
+        Storage::disk('public')->assertExists(substr($savedContent['rooms']['image'], strlen('storage/')));
+        Storage::disk('public')->assertExists(substr($savedContent['gallery']['images'][0]['image'], strlen('storage/')));
 
-        $this->get(route('home'))->assertOk()->assertSee('A Thoughtful Stay');
+        $this->get(route('rooms.index'))->assertOk()->assertSee('NPR 2,500 (test)');
+        $this->get(route('home'))->assertOk()->assertSee('Previously saved hero copy');
     }
 
     public function test_admin_content_validation_rejects_non_image_uploads(): void
@@ -86,13 +111,13 @@ class AdminContentTest extends TestCase
         Storage::fake('public');
         $admin = User::factory()->create(['is_admin' => true]);
         $payload = $this->editorPayload();
-        $payload['hero']['image_upload'] = UploadedFile::fake()->create('notes.txt', 2, 'text/plain');
+        $payload['rooms']['image_upload'] = UploadedFile::fake()->create('notes.txt', 2, 'text/plain');
 
         $this->actingAs($admin)
             ->from(route('admin.content.edit'))
             ->put(route('admin.content.update'), $payload)
             ->assertRedirect(route('admin.content.edit'))
-            ->assertSessionHasErrors('hero.image_upload');
+            ->assertSessionHasErrors('rooms.image_upload');
 
         $this->assertDatabaseCount('homepage_contents', 0);
     }
@@ -102,22 +127,6 @@ class AdminContentTest extends TestCase
         $content = config('homepage');
 
         return [
-            'hero' => [
-                'title_first' => $content['hero']['title_first'],
-                'title_second' => $content['hero']['title_second'],
-                'intro' => $content['hero']['intro'],
-                'credit' => $content['hero']['credit'],
-                'credit_url' => $content['hero']['credit_url'],
-            ],
-            'about' => [
-                'title_first' => $content['about']['title_first'],
-                'title_second' => $content['about']['title_second'],
-                'intro' => $content['about']['intro'],
-                'description' => $content['about']['description'],
-                'image_alt' => $content['about']['image_alt'],
-                'credit' => $content['about']['credit'],
-                'credit_url' => $content['about']['credit_url'],
-            ],
             'rooms' => [
                 'title_first' => $content['rooms']['title_first'],
                 'title_second' => $content['rooms']['title_second'],
@@ -127,18 +136,6 @@ class AdminContentTest extends TestCase
                 'credit' => $content['rooms']['credit'],
                 'credit_url' => $content['rooms']['credit_url'],
                 'types' => $content['rooms']['types'],
-            ],
-            'experience' => [
-                'title_first' => $content['experience']['title_first'],
-                'title_second' => $content['experience']['title_second'],
-                'intro' => $content['experience']['intro'],
-                'services' => array_map(static fn (array $service): array => [
-                    'title' => $service['title'],
-                    'description' => $service['description'],
-                    'image_alt' => $service['image_alt'],
-                    'credit' => $service['credit'],
-                    'credit_url' => $service['credit_url'],
-                ], $content['experience']['services']),
             ],
             'gallery' => [
                 'title_first' => $content['gallery']['title_first'],
@@ -150,11 +147,6 @@ class AdminContentTest extends TestCase
                     'credit' => $image['credit'],
                     'credit_url' => $image['credit_url'],
                 ], $content['gallery']['images']),
-            ],
-            'contact' => [
-                'title_first' => $content['contact']['title_first'],
-                'title_second' => $content['contact']['title_second'],
-                'intro' => $content['contact']['intro'],
             ],
         ];
     }
