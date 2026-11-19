@@ -22,7 +22,10 @@ class HomepageTest extends TestCase
             ->assertSee('sagarshrestha813@gmail.com')
             ->assertSee('href="mailto:sagarshrestha813@gmail.com"', false)
             ->assertSee('href="https://wa.me/9779855016037"', false)
-            ->assertSee('href="tel:9855016037"', false);
+            ->assertSee('href="tel:9855016037"', false)
+            ->assertSee('href="https://www.facebook.com/"', false)
+            ->assertSee('href="https://www.instagram.com/"', false)
+            ->assertSee('href="https://www.youtube.com/"', false);
 
         self::assertSame(5, preg_match_all('/<section\b/', (string) $response->getContent()));
     }
