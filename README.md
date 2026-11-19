@@ -2,6 +2,8 @@
 
 A six-section, responsive Laravel and Blade website for Nova Hospitality. Illustrative photographs are not Nova Hospitality properties. Homepage copy and images can be updated through the protected admin panel; image credits are listed below the gallery.
 
+The standalone Rooms page currently shows proposed room categories. Rates, services, amenities, and availability are explicitly marked as unconfirmed until Nova Hospitality supplies verified details.
+
 ## Local development
 
 1. Install PHP/Composer and Node.js/npm.

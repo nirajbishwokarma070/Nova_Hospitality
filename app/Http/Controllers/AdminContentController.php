@@ -13,7 +13,10 @@ class AdminContentController extends Controller
 {
     public function edit(): View
     {
-        $content = HomepageContent::query()->find(1)?->content ?? config('homepage');
+        $content = array_replace_recursive(
+            config('homepage'),
+            HomepageContent::query()->find(1)?->content ?? [],
+        );
 
         return view('admin.homepage', compact('content'));
     }
@@ -38,10 +41,17 @@ class AdminContentController extends Controller
             'rooms.title_first' => ['required', 'string', 'max:80'],
             'rooms.title_second' => ['required', 'string', 'max:80'],
             'rooms.intro' => ['required', 'string', 'max:300'],
+            'rooms.draft_notice' => ['required', 'string', 'max:400'],
             'rooms.image_alt' => ['required', 'string', 'max:180'],
             'rooms.credit' => ['nullable', 'string', 'max:120'],
             'rooms.credit_url' => ['nullable', 'url', 'max:2048'],
             'rooms.image_upload' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'rooms.types' => ['required', 'array', 'size:4'],
+            'rooms.types.*.name' => ['required', 'string', 'max:100'],
+            'rooms.types.*.description' => ['required', 'string', 'max:400'],
+            'rooms.types.*.price' => ['required', 'string', 'max:100'],
+            'rooms.types.*.services' => ['required', 'string', 'max:400'],
+            'rooms.types.*.availability' => ['required', 'string', 'max:120'],
             'experience.title_first' => ['required', 'string', 'max:80'],
             'experience.title_second' => ['required', 'string', 'max:80'],
             'experience.intro' => ['required', 'string', 'max:300'],
@@ -71,7 +81,7 @@ class AdminContentController extends Controller
         if (! $record->exists) {
             $record->id = 1;
         }
-        $current = $record->content ?? config('homepage');
+        $current = array_replace_recursive(config('homepage'), $record->content ?? []);
         $replacedImages = [];
 
         $content = [
@@ -97,10 +107,18 @@ class AdminContentController extends Controller
                 'title_first' => $validated['rooms']['title_first'],
                 'title_second' => $validated['rooms']['title_second'],
                 'intro' => $validated['rooms']['intro'],
+                'draft_notice' => $validated['rooms']['draft_notice'],
                 'image' => $this->storeImage($request->file('rooms.image_upload'), $current['rooms']['image'], $replacedImages),
                 'image_alt' => $validated['rooms']['image_alt'],
                 'credit' => $validated['rooms']['credit'] ?? '',
                 'credit_url' => $validated['rooms']['credit_url'] ?? '',
+                'types' => array_map(static fn (array $room): array => [
+                    'name' => $room['name'],
+                    'description' => $room['description'],
+                    'price' => $room['price'],
+                    'services' => $room['services'],
+                    'availability' => $room['availability'],
+                ], $validated['rooms']['types']),
             ],
             'experience' => [
                 'title_first' => $validated['experience']['title_first'],

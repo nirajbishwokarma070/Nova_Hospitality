@@ -129,6 +129,11 @@
                     <textarea id="rooms-intro" name="rooms[intro]" rows="2" maxlength="300" required>{{ old('rooms.intro', $content['rooms']['intro']) }}</textarea>
                     @error('rooms.intro')<span class="admin-error">{{ $message }}</span>@enderror
                 </div>
+                <div class="admin-field admin-field--wide">
+                    <label for="rooms-draft-notice">Room information notice</label>
+                    <textarea id="rooms-draft-notice" name="rooms[draft_notice]" rows="2" maxlength="400" required>{{ old('rooms.draft_notice', $content['rooms']['draft_notice']) }}</textarea>
+                    @error('rooms.draft_notice')<span class="admin-error">{{ $message }}</span>@enderror
+                </div>
                 <div class="admin-image-field">
                     <img src="{{ asset($content['rooms']['image']) }}" alt="" loading="lazy">
                     <div class="admin-field">
@@ -148,6 +153,38 @@
                     </div>
                 </div>
             </div>
+            @foreach ($content['rooms']['types'] as $index => $room)
+                <fieldset class="admin-subsection">
+                    <legend>Proposed room type {{ $index + 1 }}</legend>
+                    <div class="admin-fields">
+                        <div class="admin-field">
+                            <label for="room-{{ $index }}-name">Room type</label>
+                            <input id="room-{{ $index }}-name" name="rooms[types][{{ $index }}][name]" value="{{ old("rooms.types.$index.name", $room['name']) }}" maxlength="100" required>
+                            @error("rooms.types.$index.name")<span class="admin-error">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="admin-field">
+                            <label for="room-{{ $index }}-price">Price or rate note</label>
+                            <input id="room-{{ $index }}-price" name="rooms[types][{{ $index }}][price]" value="{{ old("rooms.types.$index.price", $room['price']) }}" maxlength="100" required>
+                            @error("rooms.types.$index.price")<span class="admin-error">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="admin-field admin-field--wide">
+                            <label for="room-{{ $index }}-description">Description</label>
+                            <textarea id="room-{{ $index }}-description" name="rooms[types][{{ $index }}][description]" rows="2" maxlength="400" required>{{ old("rooms.types.$index.description", $room['description']) }}</textarea>
+                            @error("rooms.types.$index.description")<span class="admin-error">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="admin-field admin-field--wide">
+                            <label for="room-{{ $index }}-services">Services and amenities</label>
+                            <textarea id="room-{{ $index }}-services" name="rooms[types][{{ $index }}][services]" rows="2" maxlength="400" required>{{ old("rooms.types.$index.services", $room['services']) }}</textarea>
+                            @error("rooms.types.$index.services")<span class="admin-error">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="admin-field admin-field--wide">
+                            <label for="room-{{ $index }}-availability">Availability</label>
+                            <input id="room-{{ $index }}-availability" name="rooms[types][{{ $index }}][availability]" value="{{ old("rooms.types.$index.availability", $room['availability']) }}" maxlength="120" required>
+                            @error("rooms.types.$index.availability")<span class="admin-error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </fieldset>
+            @endforeach
         </section>
 
         <section class="admin-card admin-section" aria-labelledby="experience-fields">

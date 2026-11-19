@@ -44,6 +44,8 @@ class AdminContentTest extends TestCase
         $payload = $this->editorPayload();
         $payload['hero']['title_first'] = 'A Thoughtful Stay';
         $payload['hero']['image_upload'] = $this->fakePng();
+        $payload['rooms']['types'][0]['price'] = 'NPR 2,500 (test)';
+        $payload['rooms']['types'][0]['availability'] = 'Available (test)';
 
         $this->post(route('admin.login.store'), [
             'email' => $admin->email,
@@ -57,7 +59,8 @@ class AdminContentTest extends TestCase
         $savedContent = HomepageContent::query()->firstOrFail()->content;
 
         self::assertSame('A Thoughtful Stay', $savedContent['hero']['title_first']);
-        self::assertSame('Room details are coming soon. Please contact Nova Hospitality for current information.', $savedContent['rooms']['intro']);
+        self::assertSame('NPR 2,500 (test)', $savedContent['rooms']['types'][0]['price']);
+        self::assertSame('Available (test)', $savedContent['rooms']['types'][0]['availability']);
         self::assertStringStartsWith('storage/homepage/', $savedContent['hero']['image']);
         Storage::disk('public')->assertExists(substr($savedContent['hero']['image'], strlen('storage/')));
 
@@ -105,9 +108,11 @@ class AdminContentTest extends TestCase
                 'title_first' => $content['rooms']['title_first'],
                 'title_second' => $content['rooms']['title_second'],
                 'intro' => $content['rooms']['intro'],
+                'draft_notice' => $content['rooms']['draft_notice'],
                 'image_alt' => $content['rooms']['image_alt'],
                 'credit' => $content['rooms']['credit'],
                 'credit_url' => $content['rooms']['credit_url'],
+                'types' => $content['rooms']['types'],
             ],
             'experience' => [
                 'title_first' => $content['experience']['title_first'],

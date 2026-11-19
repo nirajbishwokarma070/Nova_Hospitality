@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function __invoke(): View
     {
-        $content = HomepageContent::query()->find(1)?->content ?? config('homepage');
+        $content = array_replace_recursive(config('homepage'), HomepageContent::query()->find(1)?->content ?? []);
         $media = array_merge(
             [$content['hero'], $content['about'], $content['rooms']],
             $content['experience']['services'],

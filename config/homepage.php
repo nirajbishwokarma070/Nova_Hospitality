@@ -22,11 +22,42 @@ return [
     'rooms' => [
         'title_first' => 'Our',
         'title_second' => 'Rooms',
-        'intro' => 'Room details are coming soon. Please contact Nova Hospitality for current information.',
+        'intro' => 'Explore these proposed room categories. Please contact Nova Hospitality for current information.',
+        'draft_notice' => 'These are proposed room categories, not confirmed offerings. Room details, rates, services, and availability must be confirmed with Nova Hospitality.',
         'image' => 'images/pokhara-room.webp',
         'image_alt' => 'Illustrative guest room in Pokhara, Nepal; not a Nova Hospitality room',
         'credit' => 'Pokhara room — Ashok Acharya, Unsplash',
         'credit_url' => 'https://unsplash.com/photos/a-couple-of-people-sitting-on-a-bed-looking-out-a-window-dNbP-9Zaz-8',
+        'types' => [
+            [
+                'name' => 'Standard Room',
+                'description' => 'A proposed category for guests looking for a straightforward, comfortable stay. Room layout and included features need confirmation.',
+                'price' => 'Contact for rates',
+                'services' => 'Not confirmed. Contact Nova Hospitality for current information.',
+                'availability' => 'Contact Nova Hospitality to confirm.',
+            ],
+            [
+                'name' => 'Deluxe Room',
+                'description' => 'A proposed option for guests seeking a little more room to settle in. Size and inclusions need confirmation.',
+                'price' => 'Contact for rates',
+                'services' => 'Not confirmed. Contact Nova Hospitality for current information.',
+                'availability' => 'Contact Nova Hospitality to confirm.',
+            ],
+            [
+                'name' => 'Twin Room',
+                'description' => 'A proposed category for guests who prefer separate beds. Bed configuration and capacity need confirmation.',
+                'price' => 'Contact for rates',
+                'services' => 'Not confirmed. Contact Nova Hospitality for current information.',
+                'availability' => 'Contact Nova Hospitality to confirm.',
+            ],
+            [
+                'name' => 'Family Room',
+                'description' => 'A proposed option for family stays. Capacity, layout, and inclusions need confirmation.',
+                'price' => 'Contact for rates',
+                'services' => 'Not confirmed. Contact Nova Hospitality for current information.',
+                'availability' => 'Contact Nova Hospitality to confirm.',
+            ],
+        ],
     ],
     'experience' => [
         'title_first' => 'Experience the',

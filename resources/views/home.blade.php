@@ -35,7 +35,7 @@
             <p class="eyebrow"><span></span> Rooms</p>
             <h2 id="rooms-title">{{ $content['rooms']['title_first'] }}<br><em>{{ $content['rooms']['title_second'] }}</em></h2>
             <p>{{ $content['rooms']['intro'] }}</p>
-            <x-button href="#contact" variant="text">Ask us about rooms <span aria-hidden="true">↗</span></x-button>
+            <x-button href="{{ route('rooms.index') }}" variant="text">Explore room options <span aria-hidden="true">↗</span></x-button>
         </div>
         <div class="rooms__image reveal">
             <img src="{{ asset($content['rooms']['image']) }}" alt="{{ $content['rooms']['image_alt'] }}" width="1200" height="800" loading="lazy">

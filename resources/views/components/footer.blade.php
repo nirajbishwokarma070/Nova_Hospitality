@@ -9,7 +9,7 @@
         <div class="footer-links">
             <h2>Explore</h2>
             <a href="{{ route('home') }}#about">About</a>
-            <a href="{{ route('home') }}#rooms">Rooms</a>
+            <a href="{{ route('rooms.index') }}">Rooms</a>
             <a href="{{ route('home') }}#experience">Experience</a>
             <a href="{{ route('home') }}#gallery">Gallery</a>
             <a href="{{ route('home') }}#contact">Contact</a>
