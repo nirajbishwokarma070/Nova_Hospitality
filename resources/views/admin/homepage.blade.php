@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Homepage editor — Nova Hospitality')
+@section('admin-context', 'Homepage editor')
 
 @section('content')
     <div class="admin-page-heading">
@@ -21,6 +22,7 @@
     <form class="admin-editor" method="POST" action="{{ route('admin.content.update') }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+        <input type="hidden" name="section" value="{{ request()->query('section', '') }}">
 
         <section class="admin-card admin-section" aria-labelledby="hero-fields">
             <div class="admin-section__heading">

@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminContentController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomsController;
@@ -22,7 +25,12 @@ Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'admin'])
     ->group(function (): void {
-        Route::get('/', [AdminContentController::class, 'edit'])->name('content.edit');
+        Route::get('/', AdminDashboardController::class)->name('dashboard');
+        Route::get('/homepage', [AdminContentController::class, 'edit'])->name('content.edit');
         Route::put('/homepage', [AdminContentController::class, 'update'])->name('content.update');
+        Route::get('/contacts', [AdminContactController::class, 'index'])->name('contacts.index');
+        Route::post('/contacts/{contactMessage}/read', [AdminContactController::class, 'markRead'])->name('contacts.read');
+        Route::get('/settings', [AdminSettingsController::class, 'edit'])->name('settings.edit');
+        Route::put('/settings/password', [AdminSettingsController::class, 'updatePassword'])->name('settings.password.update');
         Route::post('/logout', [AdminAuthController::class, 'destroy'])->name('logout');
     });

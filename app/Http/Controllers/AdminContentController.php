@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HomepageContent;
+use App\Models\ContactMessage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -18,7 +19,10 @@ class AdminContentController extends Controller
             HomepageContent::query()->find(1)?->content ?? [],
         );
 
-        return view('admin.homepage', compact('content'));
+        return view('admin.homepage', [
+            'content' => $content,
+            'unreadMessages' => ContactMessage::query()->whereNull('read_at')->count(),
+        ]);
     }
 
     public function update(Request $request): RedirectResponse
@@ -177,7 +181,13 @@ class AdminContentController extends Controller
             }
         }
 
-        return redirect()->route('admin.content.edit')->with('success', 'Homepage content updated.');
+        $section = in_array($request->input('section'), ['rooms', 'gallery'], true)
+            ? $request->input('section')
+            : null;
+
+        return redirect()
+            ->route('admin.content.edit', array_filter(['section' => $section]))
+            ->with('success', 'Homepage content updated.');
     }
 
     /**

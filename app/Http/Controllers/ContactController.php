@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -25,6 +26,7 @@ class ContactController extends Controller
         }
 
         $validated = $validator->validated();
+        ContactMessage::query()->create($validated);
         $body = implode("\n\n", [
             "From: {$validated['name']} <{$validated['email']}>",
             $validated['message'],

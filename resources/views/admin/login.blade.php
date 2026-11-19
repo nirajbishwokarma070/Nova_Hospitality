@@ -6,7 +6,7 @@
     <section class="admin-card admin-login" aria-labelledby="admin-title">
         <p class="admin-eyebrow">Nova Hospitality</p>
         <h1 id="admin-title">Admin sign in</h1>
-        <p class="admin-description">Sign in to update homepage text and photography.</p>
+        <p class="admin-description">Sign in to manage website content, enquiries, and your administrator account.</p>
 
         <form class="admin-form" method="POST" action="{{ route('admin.login.store') }}">
             @csrf

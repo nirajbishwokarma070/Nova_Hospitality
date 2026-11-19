@@ -17,6 +17,8 @@ class AdminContentTest extends TestCase
     {
         $this->get(route('admin.content.edit'))
             ->assertRedirect(route('login'));
+        $this->get(route('admin.dashboard'))
+            ->assertRedirect(route('login'));
 
         $this->get(route('login'))->assertOk();
     }
@@ -50,7 +52,7 @@ class AdminContentTest extends TestCase
         $this->post(route('admin.login.store'), [
             'email' => $admin->email,
             'password' => 'password',
-        ])->assertRedirect(route('admin.content.edit'));
+        ])->assertRedirect(route('admin.dashboard'));
 
         $this->put(route('admin.content.update'), $payload)
             ->assertRedirect(route('admin.content.edit'))

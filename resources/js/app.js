@@ -72,3 +72,93 @@ if ('IntersectionObserver' in window) {
 } else {
     revealItems.forEach((item) => item.classList.add('is-visible'));
 }
+
+const adminShell = document.querySelector('[data-admin-shell]');
+const adminMenuToggle = document.querySelector('[data-admin-menu-toggle]');
+const adminBackdrop = document.querySelector('[data-admin-backdrop]');
+const adminNavigation = document.querySelector('[data-admin-nav]');
+
+if (adminShell && adminMenuToggle && adminBackdrop) {
+    const closeAdminMenu = () => {
+        adminShell.classList.remove('is-menu-open');
+        adminMenuToggle.setAttribute('aria-expanded', 'false');
+        adminMenuToggle.setAttribute('aria-label', 'Open admin navigation');
+    };
+
+    adminMenuToggle.addEventListener('click', () => {
+        const isOpen = adminMenuToggle.getAttribute('aria-expanded') === 'true';
+        adminShell.classList.toggle('is-menu-open', !isOpen);
+        adminMenuToggle.setAttribute('aria-expanded', String(!isOpen));
+        adminMenuToggle.setAttribute('aria-label', isOpen ? 'Open admin navigation' : 'Close admin navigation');
+    });
+
+    adminBackdrop.addEventListener('click', closeAdminMenu);
+    adminNavigation?.addEventListener('click', (event) => {
+        if (event.target.closest('a')) closeAdminMenu();
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeAdminMenu();
+    });
+}
+
+const adminClock = document.querySelector('[data-admin-clock]');
+
+if (adminClock) {
+    const clockFormatter = new Intl.DateTimeFormat(undefined, {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    });
+    const updateAdminClock = () => {
+        const now = new Date();
+        adminClock.textContent = clockFormatter.format(now);
+        adminClock.dateTime = now.toISOString();
+    };
+
+    updateAdminClock();
+    window.setInterval(updateAdminClock, 1000);
+}
+
+const fullscreenToggle = document.querySelector('[data-fullscreen-toggle]');
+const fullscreenStatus = document.querySelector('[data-fullscreen-status]');
+
+if (fullscreenToggle) {
+    const updateFullscreenButton = () => {
+        const isFullscreen = Boolean(document.fullscreenElement);
+        const label = isFullscreen ? 'Exit full screen' : 'Enter full screen';
+        fullscreenToggle.setAttribute('aria-label', label);
+        fullscreenToggle.setAttribute('title', label);
+    };
+
+    fullscreenToggle.addEventListener('click', async () => {
+        if (!document.fullscreenEnabled) {
+            fullscreenStatus.textContent = 'Full screen is unavailable in this browser.';
+            return;
+        }
+
+        try {
+            if (document.fullscreenElement) {
+                await document.exitFullscreen();
+            } else {
+                await document.documentElement.requestFullscreen();
+            }
+            fullscreenStatus.textContent = '';
+        } catch {
+            fullscreenStatus.textContent = 'Unable to change full-screen mode.';
+        }
+    });
+
+    document.addEventListener('fullscreenchange', updateFullscreenButton);
+    updateFullscreenButton();
+}
+
+const logoutForm = document.querySelector('[data-admin-logout]');
+
+logoutForm?.addEventListener('submit', (event) => {
+    if (!window.confirm('Are you sure you want to log out?')) {
+        event.preventDefault();
+    }
+});

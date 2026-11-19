@@ -18,8 +18,8 @@ The standalone Rooms page currently shows proposed room categories. Rates, servi
 
 Run the feature tests with `php artisan test`.
 
-The admin panel edits homepage text, image descriptions, and image uploads. Uploaded images are limited to JPG, PNG, or WebP files up to 5 MB. Admin accounts are created only from the command line.
+The admin workspace includes an overview dashboard, room and gallery editing, a saved contact-message inbox, and administrator password settings. The sidebar provides responsive navigation, a live clock, full-screen control, and confirmed sign-out. Uploaded images are limited to JPG, PNG, or WebP files up to 5 MB. Admin accounts are created only from the command line.
 
 ## Contact email
 
-The contact form validates and emails messages to `sagarshrestha813@gmail.com`. The default local Laravel mailer is `log`, which writes mail to the application log instead of delivering it. Configure `MAIL_MAILER=smtp` and the SMTP host, port, credentials, scheme, and an authorized `MAIL_FROM_ADDRESS` in `.env` to deliver messages.
+The contact form validates, saves messages to the protected admin inbox, and emails them to `sagarshrestha813@gmail.com`. The default local Laravel mailer is `log`, which writes mail to the application log instead of delivering it. Configure `MAIL_MAILER=smtp` and the SMTP host, port, credentials, scheme, and an authorized `MAIL_FROM_ADDRESS` in `.env` to deliver messages.

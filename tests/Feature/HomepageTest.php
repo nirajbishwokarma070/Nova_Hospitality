@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Mail\Events\MessageSent;
+use App\Models\ContactMessage;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -65,6 +66,13 @@ class HomepageTest extends TestCase
 
         $response->assertRedirect(route('home').'#contact')
             ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('contact_messages', [
+            'name' => 'A Guest',
+            'email' => 'guest@example.com',
+            'subject' => 'A question',
+            'message' => 'I would like to know more.',
+        ]);
 
         Event::assertDispatched(MessageSent::class, static function (MessageSent $event): bool {
             $recipients = $event->message->getTo();
