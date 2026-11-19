@@ -108,7 +108,7 @@ button { color: inherit; }
 .contact-bar__social-dot { fill: currentColor; stroke: none; }
 .site-header__inner {
     width: min(100% - 88px, 1380px);
-    min-height: 104px;
+    min-height: 82px;
     margin: auto;
     display: flex;
     align-items: center;
@@ -394,7 +394,7 @@ button { color: inherit; }
     .contact-bar__item--email { min-width: 0; }
     .contact-bar__item--email span { overflow: hidden; text-overflow: ellipsis; }
     .contact-bar__channel { display: none; }
-    .site-header__inner { width: calc(100% - 36px); min-height: 78px; gap: 12px; }
+    .site-header__inner { width: calc(100% - 36px); min-height: 68px; gap: 12px; }
     .brand img { width: 142px; }
     .menu-toggle {
         width: 42px;
