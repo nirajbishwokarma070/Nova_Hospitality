@@ -77,6 +77,7 @@ const adminShell = document.querySelector('[data-admin-shell]');
 const adminMenuToggle = document.querySelector('[data-admin-menu-toggle]');
 const adminBackdrop = document.querySelector('[data-admin-backdrop]');
 const adminNavigation = document.querySelector('[data-admin-nav]');
+const adminTopbar = document.querySelector('[data-admin-topbar]');
 
 if (adminShell && adminMenuToggle && adminBackdrop) {
     const closeAdminMenu = () => {
@@ -99,6 +100,33 @@ if (adminShell && adminMenuToggle && adminBackdrop) {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') closeAdminMenu();
     });
+
+    if (adminTopbar) {
+        let previousScrollY = window.scrollY;
+        let previousDirection = 0;
+        let directionDistance = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const delta = currentScrollY - previousScrollY;
+            const direction = Math.sign(delta);
+
+            if (currentScrollY < 72 || adminShell.classList.contains('is-menu-open') || adminTopbar.contains(document.activeElement)) {
+                adminTopbar.classList.remove('is-hidden');
+                directionDistance = 0;
+            } else if (direction !== 0) {
+                if (direction !== previousDirection) directionDistance = 0;
+                directionDistance += Math.abs(delta);
+                previousDirection = direction;
+
+                if (directionDistance >= (direction > 0 ? 12 : 8)) {
+                    adminTopbar.classList.toggle('is-hidden', direction > 0);
+                }
+            }
+
+            previousScrollY = currentScrollY;
+        }, { passive: true });
+    }
 }
 
 const adminClock = document.querySelector('[data-admin-clock]');

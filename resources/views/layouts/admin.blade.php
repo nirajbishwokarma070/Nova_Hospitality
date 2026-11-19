@@ -50,7 +50,7 @@
             <button class="admin-sidebar-backdrop" type="button" aria-label="Close admin navigation" data-admin-backdrop></button>
 
             <div class="admin-workspace">
-                <header class="admin-topbar">
+                <header class="admin-topbar" data-admin-topbar>
                     <button class="admin-menu-toggle" type="button" aria-expanded="false" aria-controls="admin-sidebar" aria-label="Open admin navigation" data-admin-menu-toggle>
                         <span></span><span></span><span></span>
                     </button>

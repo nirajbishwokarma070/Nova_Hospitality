@@ -534,7 +534,10 @@ button { color: inherit; }
     border-bottom: 1px solid #e4e6df;
     background: rgb(255 255 255 / 94%);
     backdrop-filter: blur(12px);
+    transition: transform .22s ease;
 }
+.admin-topbar.is-hidden { transform: translateY(calc(-100% - 1px)); }
+.admin-topbar.is-hidden:focus-within { transform: translateY(0); }
 .admin-topbar__section { margin: 0; color: #39453d; font-size: 12px; font-weight: 600; }
 .admin-topbar__actions { display: flex; align-items: center; gap: 16px; margin-left: auto; }
 .admin-clock { color: #606b62; font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; }
