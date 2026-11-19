@@ -14,6 +14,8 @@ class RoomsPageTest extends TestCase
         $response = $this->get(route('rooms.index'));
 
         $response->assertOk()
+            ->assertSee('class="site-header"', false)
+            ->assertDontSee('site-header--home')
             ->assertSee('Room details, rates, services, and availability must be confirmed with Nova Hospitality.')
             ->assertSee('Standard Room')
             ->assertSee('Deluxe Room')

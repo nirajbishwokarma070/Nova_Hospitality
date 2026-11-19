@@ -1,4 +1,4 @@
-<header class="site-header" data-site-header>
+<header @class(['site-header', 'site-header--home' => request()->routeIs('home')]) data-site-header>
     <div class="contact-bar">
         <div class="contact-bar__inner">
             <div class="contact-bar__left">

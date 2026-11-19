@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HomepageContent;
+use App\Services\HomepageContentLoader;
 use Illuminate\Contracts\View\View;
 
 class RoomsController extends Controller
 {
-    public function __invoke(): View
+    public function __invoke(HomepageContentLoader $contentLoader): View
     {
-        $content = array_replace_recursive(
-            config('homepage'),
-            HomepageContent::query()->find(1)?->content ?? [],
-        );
+        $content = $contentLoader->load();
 
         return view('rooms.index', ['rooms' => $content['rooms']]);
     }

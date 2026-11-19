@@ -75,6 +75,11 @@ button { color: inherit; }
     box-shadow: 0 5px 25px rgb(0 0 0 / 12%);
     backdrop-filter: blur(12px);
 }
+.site-header:not(.site-header--home) {
+    background: rgb(23 26 25 / 95%);
+    box-shadow: 0 5px 25px rgb(0 0 0 / 12%);
+    backdrop-filter: blur(12px);
+}
 .contact-bar { border-bottom: 1px solid rgb(255 255 255 / 22%); background: var(--green); }
 .contact-bar__inner {
     width: min(100% - 88px, 1380px);

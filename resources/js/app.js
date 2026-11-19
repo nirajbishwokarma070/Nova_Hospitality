@@ -1,47 +1,51 @@
 const header = document.querySelector('[data-site-header]');
-const homeHero = document.querySelector('.hero#home');
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const navigation = document.querySelector('[data-site-nav]');
 
 document.documentElement.classList.add('js-ready');
 
-let previousScrollY = window.scrollY;
-let previousDirection = 0;
-let directionDistance = 0;
+const bindScrollVisibility = (element, shouldRemainVisible, topOffset) => {
+    let previousScrollY = window.scrollY;
+    let previousDirection = 0;
+    let directionDistance = 0;
 
-const updateHeader = () => {
-    if (!header) return;
+    const updateVisibility = () => {
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - previousScrollY;
+        const direction = Math.sign(delta);
 
-    const currentScrollY = window.scrollY;
-    header.classList.toggle('is-scrolled', currentScrollY > 24);
+        if (currentScrollY < topOffset || shouldRemainVisible()) {
+            element.classList.remove('is-hidden');
+            directionDistance = 0;
+            previousDirection = 0;
+        } else if (direction !== 0) {
+            if (direction !== previousDirection) directionDistance = 0;
+            directionDistance += Math.abs(delta);
+            previousDirection = direction;
 
-    if (!homeHero) {
-        header.classList.remove('is-hidden');
-        previousScrollY = currentScrollY;
-        return;
-    }
-
-    const direction = Math.sign(currentScrollY - previousScrollY);
-    const menuIsOpen = navigation?.classList.contains('is-open');
-    const headerHasFocus = header.contains(document.activeElement);
-
-    if (currentScrollY < 96 || menuIsOpen || headerHasFocus) {
-        header.classList.remove('is-hidden');
-        directionDistance = 0;
-    } else if (direction !== 0) {
-        if (direction !== previousDirection) directionDistance = 0;
-        directionDistance += Math.abs(currentScrollY - previousScrollY);
-        previousDirection = direction;
-
-        if (directionDistance >= (direction > 0 ? 12 : 8)) {
-            header.classList.toggle('is-hidden', direction > 0);
+            if (directionDistance >= (direction > 0 ? 12 : 8)) {
+                element.classList.toggle('is-hidden', direction > 0);
+            }
         }
-    }
 
-    previousScrollY = currentScrollY;
+        previousScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
 };
+
+const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
+
+if (header) {
+    bindScrollVisibility(
+        header,
+        () => Boolean(navigation?.classList.contains('is-open')) || header.contains(document.activeElement),
+        96,
+    );
+}
 
 if (menuToggle && navigation) {
     const closeMenu = () => {
@@ -114,6 +118,14 @@ const adminBackdrop = document.querySelector('[data-admin-backdrop]');
 const adminNavigation = document.querySelector('[data-admin-nav]');
 const adminTopbar = document.querySelector('[data-admin-topbar]');
 
+if (adminTopbar) {
+    bindScrollVisibility(
+        adminTopbar,
+        () => Boolean(adminShell?.classList.contains('is-menu-open')) || adminTopbar.contains(document.activeElement),
+        72,
+    );
+}
+
 if (adminShell && adminMenuToggle && adminBackdrop) {
     const closeAdminMenu = () => {
         adminShell.classList.remove('is-menu-open');
@@ -135,33 +147,6 @@ if (adminShell && adminMenuToggle && adminBackdrop) {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') closeAdminMenu();
     });
-
-    if (adminTopbar) {
-        let previousScrollY = window.scrollY;
-        let previousDirection = 0;
-        let directionDistance = 0;
-
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            const delta = currentScrollY - previousScrollY;
-            const direction = Math.sign(delta);
-
-            if (currentScrollY < 72 || adminShell.classList.contains('is-menu-open') || adminTopbar.contains(document.activeElement)) {
-                adminTopbar.classList.remove('is-hidden');
-                directionDistance = 0;
-            } else if (direction !== 0) {
-                if (direction !== previousDirection) directionDistance = 0;
-                directionDistance += Math.abs(delta);
-                previousDirection = direction;
-
-                if (directionDistance >= (direction > 0 ? 12 : 8)) {
-                    adminTopbar.classList.toggle('is-hidden', direction > 0);
-                }
-            }
-
-            previousScrollY = currentScrollY;
-        }, { passive: true });
-    }
 }
 
 const adminClock = document.querySelector('[data-admin-clock]');

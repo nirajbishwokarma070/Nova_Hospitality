@@ -17,6 +17,7 @@ class HomepageTest extends TestCase
         $response = $this->get(route('home'));
 
         $response->assertOk()
+            ->assertSee('class="site-header site-header--home"', false)
             ->assertSee('A New Chapter')
             ->assertSee('Hospitality That')
             ->assertSee('Explore these proposed room categories.')
