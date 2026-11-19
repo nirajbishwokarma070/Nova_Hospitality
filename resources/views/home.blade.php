@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="hero" id="home" aria-labelledby="hero-title" style="--hero-image: url('{{ asset('images/hero.webp') }}')">
+    <section class="hero" id="home" aria-labelledby="hero-title" style="--hero-image: url('{{ asset($content['hero']['image']) }}')">
         <div class="hero__content">
             <p class="eyebrow eyebrow--light"><span></span> Stay, Relax, Belong</p>
-            <h1 id="hero-title">A New Chapter<br><span>in Hospitality</span></h1>
-            <p class="hero__intro">A new place to slow down, feel at home, and make every stay memorable.</p>
+            <h1 id="hero-title">{{ $content['hero']['title_first'] }}<br><span>{{ $content['hero']['title_second'] }}</span></h1>
+            <p class="hero__intro">{{ $content['hero']['intro'] }}</p>
             <div class="hero__actions">
                 <x-button href="#about">Explore More <span aria-hidden="true">↗</span></x-button>
                 <x-button href="#contact" variant="outline">Contact Us</x-button>
@@ -13,18 +13,19 @@
         </div>
         <a class="hero__scroll" href="#about"><span></span> About Nova</a>
         <p class="hero__location">Kawasoti <span>·</span> Nepal</p>
+        <p class="hero__photo-note">Illustrative photography · not a Nova property</p>
     </section>
 
     <section class="about section-pad" id="about" aria-labelledby="about-title">
         <div class="about__image reveal">
-            <img src="{{ asset('images/about.webp') }}" alt="Illustrative photograph of a calm, thoughtfully arranged guest room" width="1200" height="800" loading="lazy">
-            <span class="image-note">A place to settle in</span>
+            <img src="{{ asset($content['about']['image']) }}" alt="{{ $content['about']['image_alt'] }}" width="1200" height="800" loading="lazy">
+            <span class="image-note">Illustrative photo · not a Nova property</span>
         </div>
         <div class="about__copy reveal">
             <p class="eyebrow"><span></span> About Nova</p>
-            <h2 id="about-title">Hospitality That<br><em>Feels Like Home</em></h2>
-            <p>Nova Hospitality is based in Kawasoti-7, Nawalparasi East.</p>
-            <p>Our approach is straightforward: a comfortable room, a warm welcome, and time to settle in at your own pace.</p>
+            <h2 id="about-title">{{ $content['about']['title_first'] }}<br><em>{{ $content['about']['title_second'] }}</em></h2>
+            <p>{{ $content['about']['intro'] }}</p>
+            <p>{{ $content['about']['description'] }}</p>
             <x-button href="#experience" variant="text">See what matters to us <span aria-hidden="true">↗</span></x-button>
         </div>
     </section>
@@ -33,84 +34,66 @@
         <div class="section-heading reveal">
             <div>
                 <p class="eyebrow"><span></span> Our approach</p>
-                <h2 id="experience-title">Experience the<br><em>Difference</em></h2>
+                <h2 id="experience-title">{{ $content['experience']['title_first'] }}<br><em>{{ $content['experience']['title_second'] }}</em></h2>
             </div>
-            <p>For us, it starts with the basics: a restful room, a personal welcome, and a little breathing room.</p>
+            <p>{{ $content['experience']['intro'] }}</p>
         </div>
         <div class="experience-grid">
-            <article class="experience-card reveal">
-                <div class="experience-card__image">
-                    <img src="{{ asset('images/stay.webp') }}" alt="Illustrative hospitality photography of a peaceful hotel setting" width="1200" height="800" loading="lazy">
-                </div>
-                <div class="experience-card__copy">
-                    <h3>Comfortable Stays</h3>
-                    <p>Room to unpack, settle in, and sleep comfortably.</p>
-                </div>
-            </article>
-            <article class="experience-card reveal">
-                <div class="experience-card__image">
-                    <img src="{{ asset('images/hospitality.webp') }}" alt="Illustrative photograph of a warm and welcoming interior" width="1200" height="800" loading="lazy">
-                </div>
-                <div class="experience-card__copy">
-                    <h3>Exceptional Hospitality</h3>
-                    <p>A friendly welcome and attentive help throughout your stay.</p>
-                </div>
-            </article>
-            <article class="experience-card reveal">
-                <div class="experience-card__image">
-                    <img src="{{ asset('images/moments.webp') }}" alt="Illustrative photograph of a quiet, welcoming place to gather" width="1200" height="800" loading="lazy">
-                </div>
-                <div class="experience-card__copy">
-                    <h3>Memorable Experiences</h3>
-                    <p>Space to slow down, enjoy a meal, and make the day your own.</p>
-                </div>
-            </article>
+            @foreach ($content['experience']['services'] as $service)
+                <article class="experience-card reveal">
+                    <div class="experience-card__image">
+                        <img src="{{ asset($service['image']) }}" alt="{{ $service['image_alt'] }}" width="1200" height="800" loading="lazy">
+                    </div>
+                    <div class="experience-card__copy">
+                        <h3>{{ $service['title'] }}</h3>
+                        <p>{{ $service['description'] }}</p>
+                    </div>
+                </article>
+            @endforeach
         </div>
-        <p class="image-disclaimer">These three ideas guide the experience Nova hopes to offer.</p>
+        <p class="image-disclaimer">These illustrative photographs do not depict Nova Hospitality properties.</p>
+        @if ($credits->isNotEmpty())
+            <details class="image-credits">
+                <summary>Photo credits</summary>
+                <ul>
+                    @foreach ($credits as $credit)
+                        <li>
+                            @if (filled($credit['credit_url']))
+                                <a href="{{ $credit['credit_url'] }}" target="_blank" rel="noopener noreferrer">{{ $credit['credit'] }}</a>
+                            @else
+                                {{ $credit['credit'] }}
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </details>
+        @endif
     </section>
 
     <section class="gallery section-pad" id="gallery" aria-labelledby="gallery-title">
         <div class="gallery__heading section-heading reveal">
             <div>
                 <p class="eyebrow"><span></span> Spaces and surroundings</p>
-                <h2 id="gallery-title">Explore Our<br><em>World</em></h2>
+                <h2 id="gallery-title">{{ $content['gallery']['title_first'] }}<br><em>{{ $content['gallery']['title_second'] }}</em></h2>
             </div>
-            <p>A visual reference for the kinds of spaces and settings we appreciate.</p>
+            <p>{{ $content['gallery']['intro'] }}</p>
         </div>
         <div class="gallery-grid">
-            <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/architecture.webp') }}" data-gallery-alt="Illustrative photograph of contemporary architecture and its surroundings">
-                <img src="{{ asset('images/architecture.webp') }}" alt="Illustrative photograph of contemporary architecture and its surroundings" width="1200" height="800" loading="lazy">
-                <span>Architecture <span aria-hidden="true">↗</span></span>
-            </button>
-            <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/gallery-table.webp') }}" data-gallery-alt="Illustrative photograph of a warmly prepared guest room">
-                <img src="{{ asset('images/gallery-table.webp') }}" alt="Illustrative photograph of a warmly prepared guest room" width="1100" height="800" loading="lazy">
-                <span>A restful room <span aria-hidden="true">↗</span></span>
-            </button>
-            <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/gallery-room.webp') }}" data-gallery-alt="Illustrative photograph of a quiet hospitality interior">
-                <img src="{{ asset('images/gallery-room.webp') }}" alt="Illustrative photograph of a quiet hospitality interior" width="1100" height="800" loading="lazy">
-                <span>A quiet interior <span aria-hidden="true">↗</span></span>
-            </button>
-            <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/dining.webp') }}" data-gallery-alt="Illustrative photograph of a thoughtful dining experience">
-                <img src="{{ asset('images/dining.webp') }}" alt="Illustrative photograph of a thoughtful dining experience" width="1200" height="800" loading="lazy">
-                <span>Dining <span aria-hidden="true">↗</span></span>
-            </button>
-            <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/moments.webp') }}" data-gallery-alt="Illustrative photograph of a welcoming place to unwind">
-                <img src="{{ asset('images/moments.webp') }}" alt="Illustrative photograph of a welcoming place to unwind" width="1200" height="800" loading="lazy">
-                <span>A place to unwind <span aria-hidden="true">↗</span></span>
-            </button>
-            <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/surroundings.webp') }}" data-gallery-alt="Illustrative photograph of a peaceful mountain landscape">
-                <img src="{{ asset('images/surroundings.webp') }}" alt="Illustrative photograph of a peaceful mountain landscape" width="1200" height="800" loading="lazy">
-                <span>Mountain surroundings <span aria-hidden="true">↗</span></span>
-            </button>
+            @foreach ($content['gallery']['images'] as $image)
+                <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset($image['image']) }}" data-gallery-alt="{{ $image['alt'] }}">
+                    <img src="{{ asset($image['image']) }}" alt="{{ $image['alt'] }}" width="1200" height="800" loading="lazy">
+                    <span>{{ $image['caption'] }} <span aria-hidden="true">↗</span></span>
+                </button>
+            @endforeach
         </div>
-        <p class="image-disclaimer">Illustrative hospitality photography, not photographs of Nova Hospitality properties.</p>
+        <p class="image-disclaimer">These illustrative photographs do not depict Nova Hospitality properties.</p>
     </section>
 
     <section class="contact section-pad" id="contact" aria-labelledby="contact-title">
         <div class="contact__intro reveal">
             <p class="eyebrow eyebrow--light"><span></span> Contact Nova Hospitality</p>
-            <h2 id="contact-title">Get in <em>Touch</em></h2>
-            <p>For enquiries, call or email us, or leave a message below.</p>
+            <h2 id="contact-title">{{ $content['contact']['title_first'] }} <em>{{ $content['contact']['title_second'] }}</em></h2>
+            <p>{{ $content['contact']['intro'] }}</p>
             <div class="contact-details">
                 <div>
                     <span class="contact-details__label">Visit us</span>

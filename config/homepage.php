@@ -1,0 +1,107 @@
+<?php
+
+return [
+    'hero' => [
+        'title_first' => 'A New Chapter',
+        'title_second' => 'in Hospitality',
+        'intro' => 'A new place to slow down, feel at home, and make every stay memorable.',
+        'image' => 'images/nepal-lodge.webp',
+        'credit' => 'White Stupa guest house — Jimmy Liu, Unsplash',
+        'credit_url' => 'https://unsplash.com/photos/a-lodge-nestled-in-a-mountain-valley-with-snow-capped-peaks-P0R7tK508I4',
+    ],
+    'about' => [
+        'title_first' => 'Hospitality That',
+        'title_second' => 'Feels Like Home',
+        'intro' => 'Nova Hospitality is based in Kawasoti-7, Nawalparasi East.',
+        'description' => 'Our approach is straightforward: a comfortable room, a warm welcome, and time to settle in at your own pace.',
+        'image' => 'images/kaski-house.webp',
+        'image_alt' => 'Illustrative Nepali home in Kaski with Machhapuchhre behind it',
+        'credit' => 'Kaski home — Sudip Shrestha, Unsplash',
+        'credit_url' => 'https://unsplash.com/photos/a-building-with-a-mountain-in-the-background-B6HS8aEEEYM',
+    ],
+    'experience' => [
+        'title_first' => 'Experience the',
+        'title_second' => 'Difference',
+        'intro' => 'For us, it starts with the basics: a restful room, a personal welcome, and a little breathing room.',
+        'services' => [
+            [
+                'title' => 'Comfortable Stays',
+                'description' => 'Room to unpack, settle in, and sleep comfortably.',
+                'image' => 'images/nepal-lodge.webp',
+                'image_alt' => 'Illustrative Nepal guest house in a mountain valley',
+                'credit' => 'White Stupa guest house — Jimmy Liu, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/a-lodge-nestled-in-a-mountain-valley-with-snow-capped-peaks-P0R7tK508I4',
+            ],
+            [
+                'title' => 'Exceptional Hospitality',
+                'description' => 'A friendly welcome and attentive help throughout your stay.',
+                'image' => 'images/pokhara-room.webp',
+                'image_alt' => 'Illustrative guest room in Pokhara',
+                'credit' => 'Pokhara room — Ashok Acharya, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/a-couple-of-people-sitting-on-a-bed-looking-out-a-window-dNbP-9Zaz-8',
+            ],
+            [
+                'title' => 'Memorable Experiences',
+                'description' => 'Space to slow down, enjoy a meal, and make the day your own.',
+                'image' => 'images/boudhanath.webp',
+                'image_alt' => 'Boudhanath Stupa in Kathmandu, Nepal',
+                'credit' => 'Boudhanath Stupa — Slava Auchynnikau, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/boudhanath-stupa-with-prayer-flags-in-kathmandu-BXrhmPPBE7g',
+            ],
+        ],
+    ],
+    'gallery' => [
+        'title_first' => 'Explore Our',
+        'title_second' => 'World',
+        'intro' => 'These illustrative photographs offer a glimpse of Nepal and the kind of atmosphere Nova hopes to create.',
+        'images' => [
+            [
+                'image' => 'images/kaski-house.webp',
+                'caption' => 'Kaski, Nepal',
+                'alt' => 'Illustrative Nepali home in Kaski with Machhapuchhre behind it',
+                'credit' => 'Kaski home — Sudip Shrestha, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/a-building-with-a-mountain-in-the-background-B6HS8aEEEYM',
+            ],
+            [
+                'image' => 'images/pokhara-room.webp',
+                'caption' => 'Pokhara',
+                'alt' => 'Illustrative guest room in Pokhara',
+                'credit' => 'Pokhara room — Ashok Acharya, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/a-couple-of-people-sitting-on-a-bed-looking-out-a-window-dNbP-9Zaz-8',
+            ],
+            [
+                'image' => 'images/nepal-lodge.webp',
+                'caption' => 'Himalayan guest house',
+                'alt' => 'Illustrative guest house in a Himalayan valley',
+                'credit' => 'White Stupa guest house — Jimmy Liu, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/a-lodge-nestled-in-a-mountain-valley-with-snow-capped-peaks-P0R7tK508I4',
+            ],
+            [
+                'image' => 'images/boudhanath.webp',
+                'caption' => 'Boudhanath, Kathmandu',
+                'alt' => 'Boudhanath Stupa and prayer flags in Kathmandu, Nepal',
+                'credit' => 'Boudhanath Stupa — Slava Auchynnikau, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/boudhanath-stupa-with-prayer-flags-in-kathmandu-BXrhmPPBE7g',
+            ],
+            [
+                'image' => 'images/manang-village.webp',
+                'caption' => 'Manang',
+                'alt' => 'Colorful village houses beneath snowy peaks in Manang, Nepal',
+                'credit' => 'Manang village — Oren Yomtov, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/pathway-between-houses-DXw3g2tSTc8',
+            ],
+            [
+                'image' => 'images/kathmandu-valley.webp',
+                'caption' => 'Kathmandu Valley',
+                'alt' => 'Snow-covered Himalayan peaks above rooftops in Madhyapur Thimi, Nepal',
+                'credit' => 'Kathmandu Valley — Sanjay Hona, Unsplash',
+                'credit_url' => 'https://unsplash.com/photos/snow-covered-mountain-XAHCmk14JfU',
+            ],
+        ],
+    ],
+    'contact' => [
+        'title_first' => 'Get in',
+        'title_second' => 'Touch',
+        'intro' => 'For enquiries, call or email us, or leave a message below.',
+    ],
+];

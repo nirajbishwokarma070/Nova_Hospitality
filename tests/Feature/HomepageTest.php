@@ -2,12 +2,15 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class HomepageTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_homepage_has_five_main_sections_and_the_company_contact_details(): void
     {
         $response = $this->get(route('home'));
