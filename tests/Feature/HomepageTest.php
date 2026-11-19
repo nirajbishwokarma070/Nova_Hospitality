@@ -19,7 +19,10 @@ class HomepageTest extends TestCase
             ->assertSee('Explore Our')
             ->assertSee('Get in')
             ->assertSee('9855016037')
-            ->assertSee('sagarshrestha813@gmail.com');
+            ->assertSee('sagarshrestha813@gmail.com')
+            ->assertSee('href="mailto:sagarshrestha813@gmail.com"', false)
+            ->assertSee('href="https://wa.me/9779855016037"', false)
+            ->assertSee('href="tel:9855016037"', false);
 
         self::assertSame(5, preg_match_all('/<section\b/', (string) $response->getContent()));
     }
