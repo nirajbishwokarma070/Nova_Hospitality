@@ -90,7 +90,7 @@ button { color: inherit; }
     align-items: center;
     gap: 7px;
     color: #fff;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: .035em;
     white-space: nowrap;
     transition: color .2s ease;
@@ -348,7 +348,7 @@ button { color: inherit; }
     .contact-bar__links { gap: 13px; }
     .contact-bar__social { gap: 12px; }
     .contact-bar__social-link svg { width: 13px; height: 13px; }
-    .contact-bar__item { gap: 5px; font-size: 9px; }
+    .contact-bar__item { gap: 5px; font-size: 10px; }
     .contact-bar__item--email { min-width: 0; }
     .contact-bar__item--email span { overflow: hidden; text-overflow: ellipsis; }
     .contact-bar__channel { display: none; }
