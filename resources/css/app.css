@@ -66,8 +66,10 @@ button { color: inherit; }
     position: fixed;
     z-index: 10;
     inset: 0 0 auto;
-    transition: background .25s ease, box-shadow .25s ease;
+    transition: transform .24s ease, background .25s ease, box-shadow .25s ease;
 }
+.site-header.is-hidden { transform: translateY(-100%); }
+.site-header.is-hidden:focus-within { transform: translateY(0); }
 .site-header.is-scrolled {
     background: rgb(23 26 25 / 95%);
     box-shadow: 0 5px 25px rgb(0 0 0 / 12%);

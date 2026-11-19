@@ -1,10 +1,45 @@
 const header = document.querySelector('[data-site-header]');
+const homeHero = document.querySelector('.hero#home');
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const navigation = document.querySelector('[data-site-nav]');
 
 document.documentElement.classList.add('js-ready');
 
-const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+let previousScrollY = window.scrollY;
+let previousDirection = 0;
+let directionDistance = 0;
+
+const updateHeader = () => {
+    if (!header) return;
+
+    const currentScrollY = window.scrollY;
+    header.classList.toggle('is-scrolled', currentScrollY > 24);
+
+    if (!homeHero) {
+        header.classList.remove('is-hidden');
+        previousScrollY = currentScrollY;
+        return;
+    }
+
+    const direction = Math.sign(currentScrollY - previousScrollY);
+    const menuIsOpen = navigation?.classList.contains('is-open');
+    const headerHasFocus = header.contains(document.activeElement);
+
+    if (currentScrollY < 96 || menuIsOpen || headerHasFocus) {
+        header.classList.remove('is-hidden');
+        directionDistance = 0;
+    } else if (direction !== 0) {
+        if (direction !== previousDirection) directionDistance = 0;
+        directionDistance += Math.abs(currentScrollY - previousScrollY);
+        previousDirection = direction;
+
+        if (directionDistance >= (direction > 0 ? 12 : 8)) {
+            header.classList.toggle('is-hidden', direction > 0);
+        }
+    }
+
+    previousScrollY = currentScrollY;
+};
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 
