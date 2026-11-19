@@ -23,6 +23,18 @@ class AdminContentTest extends TestCase
         $this->get(route('login'))->assertOk();
     }
 
+    public function test_rooms_and_gallery_editor_use_compact_summaries(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+        $this->actingAs($admin)
+            ->get(route('admin.content.edit'))
+            ->assertOk()
+            ->assertSee('Page heading, notice and feature photo')
+            ->assertSee('Room 1 · Standard Room')
+            ->assertSee('Gallery heading and supporting text')
+            ->assertSee('Image 1');
+    }
+
     public function test_regular_users_cannot_sign_in_to_the_admin_panel(): void
     {
         $user = User::factory()->create(['is_admin' => false]);

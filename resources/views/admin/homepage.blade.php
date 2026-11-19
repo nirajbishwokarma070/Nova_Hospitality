@@ -115,7 +115,9 @@
                 <p class="admin-eyebrow">Section 03</p>
                 <h2 id="rooms-fields">Rooms</h2>
             </div>
-            <div class="admin-fields">
+            <details class="admin-compact-details admin-compact-details--page" @if ($errors->any()) open @endif>
+                <summary>Page heading, notice and feature photo <span>Expand to edit</span></summary>
+                <div class="admin-fields admin-compact-details__content">
                 <div class="admin-field">
                     <label for="rooms-title-first">Heading, first line</label>
                     <input id="rooms-title-first" name="rooms[title_first]" value="{{ old('rooms.title_first', $content['rooms']['title_first']) }}" maxlength="80" required>
@@ -154,10 +156,14 @@
                         @error('rooms.credit_url')<span class="admin-error">{{ $message }}</span>@enderror
                     </div>
                 </div>
-            </div>
+                </div>
+            </details>
             @foreach ($content['rooms']['types'] as $index => $room)
-                <fieldset class="admin-subsection">
-                    <legend>Proposed room type {{ $index + 1 }}</legend>
+                <details class="admin-subsection admin-compact-details admin-compact-details--item" @if ($errors->any()) open @endif>
+                    <summary class="admin-compact-details__summary">
+                        <span class="admin-compact-details__caption">Room {{ $index + 1 }} · {{ $room['name'] }}</span>
+                        <small>{{ $room['price'] }}</small>
+                    </summary>
                     <div class="admin-fields">
                         <div class="admin-field">
                             <label for="room-{{ $index }}-name">Room type</label>
@@ -185,7 +191,7 @@
                             @error("rooms.types.$index.availability")<span class="admin-error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                </fieldset>
+                </details>
             @endforeach
         </section>
 
@@ -253,7 +259,9 @@
                 <p class="admin-eyebrow">Section 05</p>
                 <h2 id="gallery-fields">Gallery</h2>
             </div>
-            <div class="admin-fields">
+            <details class="admin-compact-details admin-compact-details--page" @if ($errors->any()) open @endif>
+                <summary>Gallery heading and supporting text <span>Expand to edit</span></summary>
+                <div class="admin-fields admin-compact-details__content">
                 <div class="admin-field">
                     <label for="gallery-title-first">Heading, first line</label>
                     <input id="gallery-title-first" name="gallery[title_first]" value="{{ old('gallery.title_first', $content['gallery']['title_first']) }}" maxlength="80" required>
@@ -269,10 +277,15 @@
                     <textarea id="gallery-intro" name="gallery[intro]" rows="2" maxlength="300" required>{{ old('gallery.intro', $content['gallery']['intro']) }}</textarea>
                     @error('gallery.intro')<span class="admin-error">{{ $message }}</span>@enderror
                 </div>
-            </div>
+                </div>
+            </details>
             @foreach ($content['gallery']['images'] as $index => $image)
-                <fieldset class="admin-subsection">
-                    <legend>Gallery image {{ $index + 1 }}</legend>
+                <details class="admin-subsection admin-compact-details admin-compact-details--item admin-compact-details--gallery" @if ($errors->any()) open @endif>
+                    <summary class="admin-compact-details__summary">
+                        <img class="admin-compact-details__thumb" src="{{ asset($image['image']) }}" alt="" loading="lazy">
+                        <span class="admin-compact-details__caption">Image {{ $index + 1 }}</span>
+                        <strong>{{ $image['caption'] }}</strong>
+                    </summary>
                     <div class="admin-fields">
                         <div class="admin-field">
                             <label for="gallery-{{ $index }}-caption">Caption</label>
@@ -300,7 +313,7 @@
                             </div>
                         </div>
                     </div>
-                </fieldset>
+                </details>
             @endforeach
         </section>
 
