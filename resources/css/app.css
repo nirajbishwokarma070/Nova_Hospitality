@@ -212,7 +212,7 @@ button { color: inherit; }
 .hero__location span { padding: 0 7px; color: #8ed394; }
 
 .section-pad { padding: 118px max(44px, calc((100% - 1240px) / 2)); }
-.about { display: grid; grid-template-columns: 1.05fr .85fr; align-items: center; gap: clamp(56px, 9vw, 130px); }
+.about { display: grid; grid-template-columns: 1.05fr .85fr; align-items: center; gap: clamp(56px, 9vw, 130px); padding-bottom: 78px; }
 .about__image { position: relative; }
 .about__image::before { position: absolute; z-index: 0; top: -19px; left: -19px; width: 36%; height: 44%; border-top: 1px solid #a6caa7; border-left: 1px solid #a6caa7; content: ''; }
 .about__image img { position: relative; width: 100%; height: 485px; object-fit: cover; }
@@ -229,7 +229,7 @@ button { color: inherit; }
 .about__copy > p:not(.eyebrow) { margin: 22px 0 0; color: var(--muted); font-size: 14px; }
 .about__copy .button { margin-top: 22px; }
 
-.experience { background: #eeede7; }
+.experience { padding-top: 72px; background: #eeede7; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 42px; margin-bottom: 48px; }
 .section-heading h2 { font-size: clamp(39px, 4.2vw, 58px); }
 .section-heading > p { max-width: 400px; margin: 0 0 5px; color: var(--muted); font-size: 14px; }
@@ -327,7 +327,8 @@ button { color: inherit; }
     .site-nav { gap: 17px; }
     .header-contact { padding: 9px 11px; }
     .section-pad { padding: 90px max(30px, calc((100% - 1240px) / 2)); }
-    .about { gap: 48px; }
+    .about { gap: 48px; padding-bottom: 65px; }
+    .experience { padding-top: 65px; }
     .about__image img { height: 420px; }
     .experience-grid { gap: 15px; }
     .experience-card__image img { height: 225px; }
@@ -397,7 +398,8 @@ button { color: inherit; }
     .hero__scroll { left: 26px; bottom: 27px; font-size: 8px; }
     .hero__location { right: 26px; bottom: 27px; font-size: 8px; }
     .section-pad { padding: 73px 24px; }
-    .about { grid-template-columns: 1fr; gap: 36px; }
+    .about { grid-template-columns: 1fr; gap: 36px; padding-bottom: 48px; }
+    .experience { padding-top: 52px; }
     .about__image img { height: min(390px, 85vw); }
     .about__copy { padding: 0; }
     .about h2, .section-heading h2 { font-size: clamp(39px, 10vw, 53px); }
