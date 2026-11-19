@@ -11,99 +11,96 @@
                 <x-button href="#contact" variant="outline">Contact Us</x-button>
             </div>
         </div>
-        <a class="hero__scroll" href="#about"><span></span> Scroll to discover</a>
+        <a class="hero__scroll" href="#about"><span></span> About Nova</a>
         <p class="hero__location">Kawasoti <span>·</span> Nepal</p>
     </section>
 
     <section class="about section-pad" id="about" aria-labelledby="about-title">
         <div class="about__image reveal">
             <img src="{{ asset('images/about.webp') }}" alt="Illustrative photograph of a calm, thoughtfully arranged guest room" width="1200" height="800" loading="lazy">
-            <span class="image-note">A feeling of being at home</span>
+            <span class="image-note">A place to settle in</span>
         </div>
         <div class="about__copy reveal">
-            <p class="eyebrow"><span></span> A warm welcome awaits</p>
+            <p class="eyebrow"><span></span> About Nova</p>
             <h2 id="about-title">Hospitality That<br><em>Feels Like Home</em></h2>
-            <p>Nova Hospitality is creating a place where time can slow down and every guest feels welcome.</p>
-            <p>Our vision is simple: thoughtful spaces, genuine care, and an easy sense of belonging—so each stay feels a little more like your own.</p>
-            <x-button href="#experience" variant="text">Discover our vision <span aria-hidden="true">↗</span></x-button>
+            <p>Nova Hospitality is based in Kawasoti-7, Nawalparasi East.</p>
+            <p>Our approach is straightforward: a comfortable room, a warm welcome, and time to settle in at your own pace.</p>
+            <x-button href="#experience" variant="text">See what matters to us <span aria-hidden="true">↗</span></x-button>
         </div>
     </section>
 
     <section class="experience section-pad" id="experience" aria-labelledby="experience-title">
         <div class="section-heading reveal">
             <div>
-                <p class="eyebrow"><span></span> The Nova feeling</p>
+                <p class="eyebrow"><span></span> Our approach</p>
                 <h2 id="experience-title">Experience the<br><em>Difference</em></h2>
             </div>
-            <p>We believe a memorable stay is found in the details: comforting spaces, thoughtful care, and moments that stay with you.</p>
+            <p>For us, it starts with the basics: a restful room, a personal welcome, and a little breathing room.</p>
         </div>
         <div class="experience-grid">
             <article class="experience-card reveal">
                 <div class="experience-card__image">
                     <img src="{{ asset('images/stay.webp') }}" alt="Illustrative hospitality photography of a peaceful hotel setting" width="1200" height="800" loading="lazy">
-                    <span class="experience-card__number">01</span>
                 </div>
                 <div class="experience-card__copy">
                     <h3>Comfortable Stays</h3>
-                    <p>Considered spaces designed to help you settle in and feel at ease.</p>
+                    <p>Room to unpack, settle in, and sleep comfortably.</p>
                 </div>
             </article>
             <article class="experience-card reveal">
                 <div class="experience-card__image">
                     <img src="{{ asset('images/hospitality.webp') }}" alt="Illustrative photograph of a warm and welcoming interior" width="1200" height="800" loading="lazy">
-                    <span class="experience-card__number">02</span>
                 </div>
                 <div class="experience-card__copy">
                     <h3>Exceptional Hospitality</h3>
-                    <p>A genuine welcome and thoughtful attention, from hello to goodbye.</p>
+                    <p>A friendly welcome and attentive help throughout your stay.</p>
                 </div>
             </article>
             <article class="experience-card reveal">
                 <div class="experience-card__image">
                     <img src="{{ asset('images/moments.webp') }}" alt="Illustrative photograph of a quiet, welcoming place to gather" width="1200" height="800" loading="lazy">
-                    <span class="experience-card__number">03</span>
                 </div>
                 <div class="experience-card__copy">
                     <h3>Memorable Experiences</h3>
-                    <p>Room for unhurried moments and the memories you make along the way.</p>
+                    <p>Space to slow down, enjoy a meal, and make the day your own.</p>
                 </div>
             </article>
         </div>
-        <p class="image-disclaimer">Our hospitality categories share the experience we aspire to create.</p>
+        <p class="image-disclaimer">These three ideas guide the experience Nova hopes to offer.</p>
     </section>
 
     <section class="gallery section-pad" id="gallery" aria-labelledby="gallery-title">
         <div class="gallery__heading section-heading reveal">
             <div>
-                <p class="eyebrow"><span></span> A little inspiration</p>
+                <p class="eyebrow"><span></span> Spaces and surroundings</p>
                 <h2 id="gallery-title">Explore Our<br><em>World</em></h2>
             </div>
-            <p>Spaces, textures, and small details that inspire our vision of a welcoming stay.</p>
+            <p>A visual reference for the kinds of spaces and settings we appreciate.</p>
         </div>
         <div class="gallery-grid">
             <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/architecture.webp') }}" data-gallery-alt="Illustrative photograph of contemporary architecture and its surroundings">
                 <img src="{{ asset('images/architecture.webp') }}" alt="Illustrative photograph of contemporary architecture and its surroundings" width="1200" height="800" loading="lazy">
-                <span>Architecture with character <span aria-hidden="true">↗</span></span>
+                <span>Architecture <span aria-hidden="true">↗</span></span>
             </button>
             <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/gallery-table.webp') }}" data-gallery-alt="Illustrative photograph of a warmly prepared guest room">
                 <img src="{{ asset('images/gallery-table.webp') }}" alt="Illustrative photograph of a warmly prepared guest room" width="1100" height="800" loading="lazy">
-                <span>Comfort in the details <span aria-hidden="true">↗</span></span>
+                <span>A restful room <span aria-hidden="true">↗</span></span>
             </button>
             <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/gallery-room.webp') }}" data-gallery-alt="Illustrative photograph of a quiet hospitality interior">
                 <img src="{{ asset('images/gallery-room.webp') }}" alt="Illustrative photograph of a quiet hospitality interior" width="1100" height="800" loading="lazy">
-                <span>A quieter kind of comfort <span aria-hidden="true">↗</span></span>
+                <span>A quiet interior <span aria-hidden="true">↗</span></span>
             </button>
             <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/dining.webp') }}" data-gallery-alt="Illustrative photograph of a thoughtful dining experience">
                 <img src="{{ asset('images/dining.webp') }}" alt="Illustrative photograph of a thoughtful dining experience" width="1200" height="800" loading="lazy">
-                <span>A moment around the table <span aria-hidden="true">↗</span></span>
+                <span>Dining <span aria-hidden="true">↗</span></span>
             </button>
             <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/moments.webp') }}" data-gallery-alt="Illustrative photograph of a welcoming place to unwind">
                 <img src="{{ asset('images/moments.webp') }}" alt="Illustrative photograph of a welcoming place to unwind" width="1200" height="800" loading="lazy">
-                <span>Room to unwind <span aria-hidden="true">↗</span></span>
+                <span>A place to unwind <span aria-hidden="true">↗</span></span>
             </button>
             <button class="gallery-item reveal" type="button" data-gallery-image="{{ asset('images/surroundings.webp') }}" data-gallery-alt="Illustrative photograph of a peaceful mountain landscape">
                 <img src="{{ asset('images/surroundings.webp') }}" alt="Illustrative photograph of a peaceful mountain landscape" width="1200" height="800" loading="lazy">
-                <span>Inspired by the outdoors <span aria-hidden="true">↗</span></span>
+                <span>Mountain surroundings <span aria-hidden="true">↗</span></span>
             </button>
         </div>
         <p class="image-disclaimer">Illustrative hospitality photography, not photographs of Nova Hospitality properties.</p>
@@ -111,9 +108,9 @@
 
     <section class="contact section-pad" id="contact" aria-labelledby="contact-title">
         <div class="contact__intro reveal">
-            <p class="eyebrow eyebrow--light"><span></span> We would love to hear from you</p>
+            <p class="eyebrow eyebrow--light"><span></span> Contact Nova Hospitality</p>
             <h2 id="contact-title">Get in <em>Touch</em></h2>
-            <p>Have a question or want to know more? Send us a note and we will be glad to hear from you.</p>
+            <p>For enquiries, call or email us, or leave a message below.</p>
             <div class="contact-details">
                 <div>
                     <span class="contact-details__label">Visit us</span>

@@ -4,7 +4,7 @@
             <a class="brand" href="{{ route('home') }}#home" aria-label="Nova Hospitality home">
                 <img src="{{ asset('images/nova-hospitality-logo.jpg') }}" alt="Nova Hospitality — Stay, Relax, Belong" width="512" height="240" loading="lazy">
             </a>
-            <p>A new place to slow down, feel at home, and make every stay memorable.</p>
+            <p>Hospitality in Kawasoti-7, Nawalparasi East, Nepal.</p>
         </div>
         <div class="footer-links">
             <h2>Explore</h2>
